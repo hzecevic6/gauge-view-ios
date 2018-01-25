@@ -10,9 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var gaugeView: GaugeView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        gaugeView.showGauge()
     }
 
     override func didReceiveMemoryWarning() {

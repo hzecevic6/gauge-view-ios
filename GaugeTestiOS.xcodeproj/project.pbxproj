@@ -14,6 +14,7 @@
 		4D4E1D5F201A214F00EDB4CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D4E1D5D201A214F00EDB4CE /* LaunchScreen.storyboard */; };
 		4D4E1D6A201A214F00EDB4CE /* GaugeTestiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4E1D69201A214F00EDB4CE /* GaugeTestiOSTests.swift */; };
 		4D4E1D75201A215000EDB4CE /* GaugeTestiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4E1D74201A215000EDB4CE /* GaugeTestiOSUITests.swift */; };
+		4D4E1D83201A217600EDB4CE /* GaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4E1D82201A217600EDB4CE /* GaugeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4D4E1D70201A215000EDB4CE /* GaugeTestiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GaugeTestiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4E1D74201A215000EDB4CE /* GaugeTestiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeTestiOSUITests.swift; sourceTree = "<group>"; };
 		4D4E1D76201A215000EDB4CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D4E1D82201A217600EDB4CE /* GaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				4D4E1D5B201A214F00EDB4CE /* Assets.xcassets */,
 				4D4E1D5D201A214F00EDB4CE /* LaunchScreen.storyboard */,
 				4D4E1D60201A214F00EDB4CE /* Info.plist */,
+				4D4E1D82201A217600EDB4CE /* GaugeView.swift */,
 			);
 			path = GaugeTestiOS;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D4E1D57201A214F00EDB4CE /* ViewController.swift in Sources */,
+				4D4E1D83201A217600EDB4CE /* GaugeView.swift in Sources */,
 				4D4E1D55201A214F00EDB4CE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +431,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PTGL969X75;
 				INFOPLIST_FILE = GaugeTestiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.helena.test.GaugeTestiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -441,7 +447,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PTGL969X75;
 				INFOPLIST_FILE = GaugeTestiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.helena.test.GaugeTestiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
