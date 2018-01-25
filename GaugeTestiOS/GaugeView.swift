@@ -11,25 +11,51 @@ import UIKit
 
 class GaugeView: UIView {
     
+    let arcStrokeSize: CGFloat = 20.0
+    var shapeLayer: CAShapeLayer = CAShapeLayer()
+    
     override func draw(_ rect: CGRect) {
         print("DRAW")
         
-        let height = self.bounds.size.height
+        initialize()
         let width = self.bounds.size.width
+        let height = self.bounds.size.height
+        let size = min(width, height)
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 100,y: 100), radius: CGFloat(20), startAngle: CGFloat(195).degreesToRadians, endAngle:CGFloat(270).degreesToRadians, clockwise: true)
+        let centerX = width / 2
+        let centerY = height / 2 + 3 * size / 8
         
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
-        
-        //change the fill color
+        shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = UIColor.clear.cgColor
-        //you can change the stroke color
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        //you can change the line width
-        shapeLayer.lineWidth = 20.0
-        
+        shapeLayer.lineWidth = arcStrokeSize
+        var circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX,y: centerY), radius: CGFloat(size / 2 - arcStrokeSize), startAngle: CGFloat(180).degreesToRadians, endAngle:CGFloat(279).degreesToRadians, clockwise: true)
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.strokeColor = UIColor.green.cgColor
         self.layer.addSublayer(shapeLayer)
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = arcStrokeSize
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX,y: centerY), radius: CGFloat(size / 2 - arcStrokeSize), startAngle: CGFloat(279).degreesToRadians, endAngle:CGFloat(306).degreesToRadians, clockwise: true)
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.strokeColor = UIColor.yellow.cgColor
+        self.layer.addSublayer(shapeLayer)
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = arcStrokeSize
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX,y: centerY), radius: CGFloat(size / 2 - arcStrokeSize), startAngle: CGFloat(306).degreesToRadians, endAngle:CGFloat(324).degreesToRadians, clockwise: true)
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.strokeColor = UIColor.orange.cgColor
+        self.layer.addSublayer(shapeLayer)
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = arcStrokeSize
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX,y: centerY), radius: CGFloat(size / 2 - arcStrokeSize), startAngle: CGFloat(324).degreesToRadians, endAngle:CGFloat(360).degreesToRadians, clockwise: true)
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        self.layer.addSublayer(shapeLayer)
+    }
+    
+    private func initialize() {
     }
     
     func showGauge() {

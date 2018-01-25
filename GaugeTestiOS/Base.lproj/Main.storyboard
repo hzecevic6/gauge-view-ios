@@ -19,16 +19,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qc0-Th-lTi" customClass="GaugeView" customModule="GaugeTestiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="10" width="375" height="667"/>
+                                <rect key="frame" x="37.5" y="10" width="300" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="13a-at-7gH"/>
+                                    <constraint firstAttribute="width" constant="300" id="vfA-aM-yd2"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qc0-Th-lTi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Nec-ko-SeZ"/>
-                            <constraint firstItem="qc0-Th-lTi" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="S1G-al-jky"/>
-                            <constraint firstItem="qc0-Th-lTi" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="WY1-06-Hvv"/>
-                            <constraint firstItem="qc0-Th-lTi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oiR-KY-YqP"/>
+                            <constraint firstItem="qc0-Th-lTi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="6q2-5c-jS4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="qc0-Th-lTi" secondAttribute="top" constant="10" id="eem-AJ-9G8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
