@@ -90,20 +90,30 @@ class GaugeView: UIView {
     }
     
     private func drawText(centerX: CGFloat, centerY: CGFloat, size: CGFloat, value: String) {
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.alignment = .left
-        
-        let attributes = [
-                          NSAttributedStringKey.font            :   UIFont.systemFont(ofSize: 10.0),
+        let attributes = [NSAttributedStringKey.font            :   UIFont.systemFont(ofSize: 10.0),
                           NSAttributedStringKey.foregroundColor : UIColor.gray]
-        let attrString = NSAttributedString(string: value, attributes: attributes)
+        let attributedString = NSAttributedString(string: value, attributes: attributes)
+    
+        let lineDistance: CGFloat = size / 2 - attributedString.size().height / 2
+        let lineEndX: CGFloat = centerX + lineDistance * cos(startAngle.degreesToRadians)
+        let lineEndY: CGFloat = centerY + lineDistance * sin(startAngle.degreesToRadians)
         
-        let distance: CGFloat = size / 2
-        let a = centerX + distance * cos(startAngle.degreesToRadians)
-        let b = centerY + distance * sin(startAngle.degreesToRadians)
+        let linePath = UIBezierPath()
+        linePath.move(to: CGPoint(x: centerX, y: centerY))
+        linePath.addLine(to: CGPoint(x: lineEndX, y: lineEndY))
         
-        let rt = CGRect(x: a - attrString.size().width/2, y: b - attrString.size().height/2, width: attrString.size().width, height: attrString.size().height)
-        attrString.draw(in: rt)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = linePath.cgPath
+        shapeLayer.strokeColor = UIColor.white.cgColor
+        shapeLayer.lineWidth = 2.0
+        
+        self.layer.addSublayer(shapeLayer)
+    
+        let a = centerX + size / 2 * cos(startAngle.degreesToRadians)
+        let b = centerY + size / 2 * sin(startAngle.degreesToRadians)
+        
+        let valueBounds = CGRect(x: a - attributedString.size().width/2, y: b - attributedString.size().height/2, width: attributedString.size().width, height: attributedString.size().height)
+        attributedString.draw(in: valueBounds)
     }
 }
 
