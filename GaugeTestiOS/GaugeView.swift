@@ -12,7 +12,7 @@ import UIKit
 class GaugeView: UIView {
     
     let angleConst: CGFloat = 180.0
-    let arcStrokeSize: CGFloat = 20.0
+    let arcStrokeSize: CGFloat = 35.0
     
     // We get this from feed.
     let minValue: CGFloat = 0.0
@@ -56,7 +56,7 @@ class GaugeView: UIView {
         let centerY = height / 2 + 3 * size / 8
         
         centerPoint = CGPoint(x: centerX, y: centerY)
-        let radius = CGFloat(size / 2 - arcStrokeSize)
+        let radius = CGFloat(size / 2)
         
         // Draw first part of the arc from min value to first threshold.
         drawArcPart(left: minValue, right: CGFloat((values[0] as NSString).floatValue), color: UIColor(hexString: colors[0]), radius: radius)
@@ -66,11 +66,13 @@ class GaugeView: UIView {
             drawText(centerX: centerX, centerY: centerY, size: size, value: values[i])
             drawArcPart(left: CGFloat((values[i] as NSString).floatValue), right: CGFloat((values[i + 1] as NSString).floatValue), color: UIColor(hexString: colors[i + 1]), radius: radius)
         }
+        
         drawText(centerX: centerX, centerY: centerY, size: size, value: values[values.count - 1])
         
         // Draw last arc part from last value to max value.
         drawArcPart(left: CGFloat((values[values.count - 1] as NSString).floatValue), right: maxValue, color: UIColor(hexString: colors[values.count]), radius: radius)
     
+        drawExtremeValues(centerX: centerX, centerY: centerY, size: size)
     }
     
     private func drawArcPart(left: CGFloat, right: CGFloat, color: UIColor, radius: CGFloat) {
@@ -90,11 +92,11 @@ class GaugeView: UIView {
     }
     
     private func drawText(centerX: CGFloat, centerY: CGFloat, size: CGFloat, value: String) {
-        let attributes = [NSAttributedStringKey.font            :   UIFont.systemFont(ofSize: 10.0),
+        let attributes = [NSAttributedStringKey.font            : UIFont.systemFont(ofSize: 10.0),
                           NSAttributedStringKey.foregroundColor : UIColor.gray]
         let attributedString = NSAttributedString(string: value, attributes: attributes)
     
-        let lineDistance: CGFloat = size / 2 - attributedString.size().height / 2
+        let lineDistance: CGFloat = size / 2 + arcStrokeSize / 2
         let lineEndX: CGFloat = centerX + lineDistance * cos(startAngle.degreesToRadians)
         let lineEndY: CGFloat = centerY + lineDistance * sin(startAngle.degreesToRadians)
         
@@ -109,11 +111,34 @@ class GaugeView: UIView {
         
         self.layer.addSublayer(shapeLayer)
     
-        let a = centerX + size / 2 * cos(startAngle.degreesToRadians)
-        let b = centerY + size / 2 * sin(startAngle.degreesToRadians)
+        let distance = size / 2 + arcStrokeSize - attributedString.size().height / 2
+        let a = centerX + distance * cos(startAngle.degreesToRadians)
+        let b = centerY + distance * sin(startAngle.degreesToRadians)
         
         let valueBounds = CGRect(x: a - attributedString.size().width/2, y: b - attributedString.size().height/2, width: attributedString.size().width, height: attributedString.size().height)
         attributedString.draw(in: valueBounds)
+    }
+    
+    private func drawExtremeValues(centerX: CGFloat, centerY: CGFloat, size: CGFloat) {
+        let attributes = [NSAttributedStringKey.font            : UIFont.systemFont(ofSize: 10.0),
+                          NSAttributedStringKey.foregroundColor : UIColor.gray]
+        let minAttributedString = NSAttributedString(string: "\(minValue)", attributes: attributes)
+        let maxAttributedString = NSAttributedString(string: "\(maxValue)", attributes: attributes)
+        
+        let minX: CGFloat = centerX + size / 2 * cos(CGFloat(angleConst).degreesToRadians)
+        let minY: CGFloat = centerY + size / 2 * sin(CGFloat(angleConst).degreesToRadians)
+        let minBounds = CGRect(x: minX - minAttributedString.size().width / 2, y: minY, width: minAttributedString.size().width, height: minAttributedString.size().height)
+        
+        let maxX: CGFloat = centerX + size / 2 * cos(CGFloat(2 * angleConst).degreesToRadians)
+        let maxY: CGFloat = centerY + size / 2 * sin(CGFloat(2 * angleConst).degreesToRadians)
+        let maxBounds = CGRect(x: maxX - maxAttributedString.size().width / 2, y: maxY, width: maxAttributedString.size().width, height: maxAttributedString.size().height)
+        
+        minAttributedString.draw(in: minBounds)
+        maxAttributedString.draw(in: maxBounds)
+    }
+    
+    private func drawMinValue() {
+        
     }
 }
 
