@@ -17,7 +17,7 @@ class GaugeView: UIView {
     // We get this from feed.
     let minValue: CGFloat = 0.0
     let maxValue: CGFloat = 100.0
-    let currentValue: String = "55.0"
+    let currentValue: String = "90.0"
     
     var centerPoint = CGPoint()
     var startAngle: CGFloat = 180.0
@@ -73,6 +73,8 @@ class GaugeView: UIView {
         drawArcPart(left: CGFloat((values[values.count - 1] as NSString).floatValue), right: maxValue, color: UIColor(hexString: colors[values.count]), radius: radius)
     
         drawExtremeValues(centerX: centerX, centerY: centerY, size: size)
+        
+        drawNeedle(centerX: centerX, centerY: centerY, size: size)
     }
     
     private func drawArcPart(left: CGFloat, right: CGFloat, color: UIColor, radius: CGFloat) {
@@ -137,8 +139,44 @@ class GaugeView: UIView {
         maxAttributedString.draw(in: maxBounds)
     }
     
-    private func drawMinValue() {
+    private func drawNeedle(centerX: CGFloat, centerY: CGFloat, size: CGFloat) {
+        var circlePath = UIBezierPath(arcCenter: CGPoint(x: centerX, y: centerY), radius: CGFloat(4), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        var shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = UIColor.black.cgColor
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.lineWidth = 4.0
+        self.layer.addSublayer(shapeLayer)
         
+        let sweepAngle = CGFloat((currentValue as NSString).floatValue) / (maxValue - minValue) * angleConst
+        
+        let distance = size / 2
+        let a = centerX + distance * cos(CGFloat(angleConst).degreesToRadians)
+        let b = centerY + distance * sin(CGFloat(angleConst).degreesToRadians)
+        
+        let linePath = UIBezierPath()
+        linePath.move(to: CGPoint(x: centerX, y: centerY - 4))
+        linePath.addLine(to: CGPoint(x: a, y: b))
+        linePath.addLine(to: CGPoint(x: centerX, y: centerY + 4))
+        linePath.close()
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.path = linePath.cgPath
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.lineWidth = 3.0
+        shapeLayer.frame = self.bounds
+//        shapeLayer.backgroundColor = UIColor.blue.cgColor
+//        shapeLayer.setAffineTransform(CGAffineTransform(rotationAngle: sweepAngle.degreesToRadians))
+        self.layer.addSublayer(shapeLayer)
+        
+        circlePath = UIBezierPath(arcCenter: CGPoint(x: a, y: b), radius: CGFloat(2), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = UIColor.black.cgColor
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.lineWidth = 2.0
+        
+        self.layer.addSublayer(shapeLayer)
     }
 }
 
