@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        gaugeView.showGauge()
+        gaugeView.showGauge(values: ["25", "50", "75"], colors: ["#009900", "#FFFF00", "#FFA500", "#FF0000"])
     }
 
     override func didReceiveMemoryWarning() {
