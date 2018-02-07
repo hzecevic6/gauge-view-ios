@@ -17,7 +17,7 @@ class GaugeView: UIView {
     // We get this from feed.
     let minValue: CGFloat = 0.0
     let maxValue: CGFloat = 100.0
-    let currentValue: String = "10.0"
+    let currentValue: String = "45.0"
     
     var centerPoint = CGPoint()
     var startAngle: CGFloat = 180.0
